@@ -10,6 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('SpeakIT')
     .setDescription('The SpeakIT API description')
+    .addBearerAuth()
     .setVersion('0.1')
     .build();
 
