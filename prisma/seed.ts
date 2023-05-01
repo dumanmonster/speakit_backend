@@ -5,6 +5,16 @@ const prisma = new PrismaClient();
 
 async function main() {
   // create two dummy definitions
+
+  const user1 = await prisma.user.upsert({
+    where: { email: 'sabin@adams.com' },
+    update: {},
+    create: {
+      email: 'sabin@adams.com',
+      name: 'Sabin Adams',
+      password: 'password-sabin',
+    },
+  });
   const def1 = await prisma.definition.upsert({
     where: { word: 'Banana' },
     update: {},
@@ -23,7 +33,7 @@ async function main() {
     },
   });
 
-  console.log({ def1, def2 });
+  console.log({ def1, def2, user1 });
 }
 
 // execute the main function

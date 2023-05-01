@@ -16,19 +16,14 @@ model Definition {
   description String
   level       String @default("A1")
 
-  topics             Topic[]
-  DefinitionOnTopics DefinitionOnTopics[]
+  topics DefinitionOnTopics[]
 }
 
 model Topic {
-  id          Int          @id @default(autoincrement())
-  name        String       @unique
-  level       String       @default("A1")
-  definitions Definition[]
-
-  Profile            Profile?             @relation(fields: [profileId], references: [id])
-  profileId          Int?
-  DefinitionOnTopics DefinitionOnTopics[]
+  id          Int                  @id @default(autoincrement())
+  name        String               @unique
+  level       String               @default("A1")
+  definitions DefinitionOnTopics[]
 }
 
 model DefinitionOnTopics {
@@ -49,15 +44,15 @@ model User {
   password  String
   createdAt DateTime @default(now())
   profile   Profile?
-  role      Role     @default(USER)
+  role      Role?     @default(USER)
 }
 
 model Profile {
-  id            Int     @id @default(autoincrement())
-  user          User    @relation(fields: [userId], references: [id])
-  userId        Int     @unique
-  learnedTopics Topic[]
-  currentLevel  String  @default("A1")
+  id            Int    @id @default(autoincrement())
+  user          User   @relation(fields: [userId], references: [id])
+  userId        Int    @unique
+  currentLevel  String @default("A1")
+  learnedTopics Int[]  @default([])
 }
 
 enum Role {
