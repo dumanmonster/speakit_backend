@@ -6,7 +6,6 @@ import { DefinitionsModule } from './definitions/definitions.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TopicsModule } from './topics/topics.module';
-import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -15,7 +14,6 @@ import { ProfilesModule } from './profiles/profiles.module';
     UsersModule,
     AuthModule,
     TopicsModule,
-    ProfilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
