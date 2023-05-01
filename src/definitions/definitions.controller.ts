@@ -33,7 +33,7 @@ export class DefinitionsController {
   @Get(':id')
   @ApiOkResponse({ type: DefinitionEntity })
   findOne(@Param('id') id: string) {
-    return this.definitionsService.findOne(+id);
+    return this.definitionsService.findOne(id);
   }
 
   @Patch(':id')
@@ -42,12 +42,12 @@ export class DefinitionsController {
     @Param('id') id: string,
     @Body() updateDefinitionDto: UpdateDefinitionDto,
   ) {
-    return this.definitionsService.update(+id, updateDefinitionDto);
+    return this.definitionsService.update(id, updateDefinitionDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: DefinitionEntity })
   remove(@Param('id') id: string) {
-    return this.definitionsService.remove(+id);
+    return this.definitionsService.remove(id);
   }
 }

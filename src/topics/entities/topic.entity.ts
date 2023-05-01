@@ -1,18 +1,17 @@
 // src/articles/entities/article.entity.ts
 
-import { Definition } from '@prisma/client';
+import { Topic } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class DefinitionEntity implements Definition {
+export class TopicEntity implements Topic {
   @ApiProperty()
   id: string;
-
   @ApiProperty()
-  word: string;
-
-  @ApiProperty()
-  description: string;
+  name: string;
 
   @ApiProperty()
   level: string;
+
+  @ApiProperty()
+  definitionIds: string[];
 }

@@ -14,16 +14,16 @@ export class DefinitionsService {
     return this.prisma.definition.findMany();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.definition.findUnique({ where: { id: id } });
   }
-  update(id: number, updateDefinitionDto: UpdateDefinitionDto) {
+  update(id: string, updateDefinitionDto: UpdateDefinitionDto) {
     return this.prisma.definition.update({
       where: { id },
       data: updateDefinitionDto,
     });
   }
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.definition.delete({ where: { id } });
   }
 }

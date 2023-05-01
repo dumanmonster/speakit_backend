@@ -8,4 +8,7 @@ export class CreateDefinitionDto {
 
   @ApiProperty()
   description: string;
+
+  @ApiProperty()
+  level: string;
 }
