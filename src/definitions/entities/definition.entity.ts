@@ -15,4 +15,7 @@ export class DefinitionEntity implements Definition {
 
   @ApiProperty()
   level: string;
+
+  @ApiProperty()
+  topicId: string;
 }

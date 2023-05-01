@@ -13,7 +13,6 @@ export class DefinitionsService {
   findAll() {
     return this.prisma.definition.findMany();
   }
-
   findOne(id: string) {
     return this.prisma.definition.findUnique({ where: { id: id } });
   }

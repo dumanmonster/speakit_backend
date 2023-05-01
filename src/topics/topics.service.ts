@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
 
 @Injectable()
 export class TopicsService {
+  constructor(private prisma: PrismaService) {}
+
   create(createTopicDto: CreateTopicDto) {
-    return 'This action adds a new topic';
+    return this.prisma.topic.create({ data: createTopicDto });
   }
 
   findAll() {
-    return `This action returns all topics`;
+    return this.prisma.topic.findMany();
+  }
+  findTopicDefinitions(id: string) {
+    return this.prisma.definition.findMany({ where: { topicId: id } });
+  }
+  findOne(id: string) {
+    return this.prisma.topic.findUnique({ where: { id: id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} topic`;
+  update(id: string, updateTopicDto: UpdateTopicDto) {
+    return this.prisma.topic.update({
+      where: { id },
+      data: updateTopicDto,
+    });
   }
 
-  update(id: number, updateTopicDto: UpdateTopicDto) {
-    return `This action updates a #${id} topic`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} topic`;
+  remove(id: string) {
+    return this.prisma.topic.delete({ where: { id } });
   }
 }

@@ -11,17 +11,19 @@ datasource db {
 }
 
 model Definition {
-  id          String @id @default(uuid())
-  word        String @unique
+  id          String  @id @default(uuid())
+  word        String  @unique
   description String
-  level       String @default("A1")
+  level       String  @default("A1")
+  Topic       Topic?  @relation(fields: [topicId], references: [id])
+  topicId     String?
 }
 
 model Topic {
-  id            String @id @default(uuid())
-  name          String @unique
-  level         String @default("A1")
-  definitionIds String[]  @default([])
+  id          String       @id @default(uuid())
+  name        String       @unique
+  level       String       @default("A1")
+  definitions Definition[]
 }
 
 model User {

@@ -11,4 +11,7 @@ export class CreateDefinitionDto {
 
   @ApiProperty()
   level: string;
+
+  @ApiProperty()
+  topicId: string;
 }

@@ -11,7 +11,4 @@ export class TopicEntity implements Topic {
 
   @ApiProperty()
   level: string;
-
-  @ApiProperty()
-  definitionIds: string[];
 }

@@ -6,7 +6,4 @@ export class CreateTopicDto {
 
   @ApiProperty()
   level: string;
-
-  @ApiProperty()
-  definitionIds: string[];
 }

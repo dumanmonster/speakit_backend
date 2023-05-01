@@ -7,7 +7,7 @@ export class UserEntity implements User {
     Object.assign(this, partial);
   }
   @ApiProperty()
-  id: number;
+  id: string;
 
   @ApiProperty()
   createdAt: Date;
