@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Definition {
+  id          Int    @id @default(autoincrement())
+  word        String @unique
+  description String
+  level       String @default("A1")
+
+  topics             Topic[]
+  DefinitionOnTopics DefinitionOnTopics[]
+}
+
+model Topic {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  level       String       @default("A1")
+  definitions Definition[]
+
+  Profile            Profile?             @relation(fields: [profileId], references: [id])
+  profileId          Int?
+  DefinitionOnTopics DefinitionOnTopics[]
+}
+
+model DefinitionOnTopics {
+  definition   Definition @relation(fields: [definitionId], references: [id])
+  definitionId Int
+  topic        Topic      @relation(fields: [topicId], references: [id])
+  topicId      Int
+  assignedAt   DateTime   @default(now())
+  assignedBy   String
+
+  @@id([definitionId, topicId])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  profile   Profile?
+  role      Role     @default(USER)
+}
+
+model Profile {
+  id            Int     @id @default(autoincrement())
+  user          User    @relation(fields: [userId], references: [id])
+  userId        Int     @unique
+  learnedTopics Topic[]
+  currentLevel  String  @default("A1")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
