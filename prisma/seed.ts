@@ -19,6 +19,13 @@ async function main() {
       password: passwordSabin,
     },
   });
+  const prof1 = await prisma.profile.upsert({
+    where: { userId: user1.id },
+    update: {},
+    create: {
+      userId: user1.id,
+    },
+  });
   const topic1 = await prisma.topic.upsert({
     where: { name: 'Fruits' },
     update: {},
@@ -45,7 +52,7 @@ async function main() {
     },
   });
 
-  console.log({ def1, def2, user1, topic1 });
+  console.log({ def1, def2, user1, topic1, prof1 });
 }
 
 // execute the main function
