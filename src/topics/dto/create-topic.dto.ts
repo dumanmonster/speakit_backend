@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTopicDto {
-  @ApiProperty()
+  @ApiProperty({ required: true })
   name: string;
 
   @ApiProperty()
