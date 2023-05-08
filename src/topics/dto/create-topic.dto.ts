@@ -11,4 +11,12 @@ export class CreateTopicDto {
   @MaxLength(2)
   @ApiProperty()
   level: string;
+
+  @IsString()
+  @MaxLength(2)
+  @ApiProperty()
+  language: string;
+
+  @ApiProperty()
+  topicImg: string;
 }

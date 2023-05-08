@@ -1,10 +1,7 @@
-// src/users/dto/create-user.dto.ts
-
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
-
-export class CreateUserDto {
+export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
@@ -28,7 +25,4 @@ export class CreateUserDto {
   @MaxLength(2)
   @ApiProperty()
   language: string;
-
-  @ApiProperty()
-  profileImg?: string;
 }

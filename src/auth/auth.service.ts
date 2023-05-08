@@ -4,10 +4,11 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { PrismaService } from './../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import { AuthEntity } from './entities/auth.entity';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from './../prisma/prisma.service';
+import { RegisterDto } from './dto/register.dto';
+import { AuthEntity } from './entities/auth.entity';
 
 @Injectable()
 export class AuthService {
@@ -34,5 +35,25 @@ export class AuthService {
     return {
       accessToken: this.jwtService.sign({ userId: user.id }),
     };
+  }
+
+  async register(createUserDto: RegisterDto) {
+    // Step 1: Fetch a user with the given email
+    const user = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
+
+    // If no user is found, throw an error
+    if (user) {
+      throw new NotFoundException(`User with such email exist`);
+    }
+
+    // Encrypt password
+    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    createUserDto.password = hashedPassword;
+
+    return this.prisma.user.create({
+      data: createUserDto,
+    });
   }
 }

@@ -16,9 +16,6 @@ export class UserEntity implements User {
   createdAt: Date;
 
   @ApiProperty()
-  updatedAt: Date;
-
-  @ApiProperty()
   name: string;
 
   @ApiProperty()
@@ -31,8 +28,14 @@ export class UserEntity implements User {
   currentLevel: string;
 
   @ApiProperty()
+  language: string;
+
+  @ApiProperty()
   learnedTopics: Array<string>;
 
   @Exclude()
   password: string;
+
+  @ApiProperty()
+  profileImg: string;
 }
