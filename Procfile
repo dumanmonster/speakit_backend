@@ -1,1 +1,1 @@
-web: npm run start:prod
+web: docker run --rm -it -p $PORT:3000 your-container-name
