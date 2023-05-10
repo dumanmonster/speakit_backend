@@ -16,5 +16,5 @@ export class TopicEntity implements Topic {
   language: string;
 
   @ApiProperty()
-  topicImg: string;
+  imageId: string;
 }

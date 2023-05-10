@@ -37,5 +37,5 @@ export class UserEntity implements User {
   password: string;
 
   @ApiProperty()
-  profileImg: string;
+  imageId: string;
 }

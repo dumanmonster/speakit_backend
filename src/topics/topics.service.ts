@@ -7,7 +7,17 @@ import { UpdateTopicDto } from './dto/update-topic.dto';
 export class TopicsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createTopicDto: CreateTopicDto) {
+  async create(createTopicDto: CreateTopicDto, file: Express.Multer.File) {
+    const image = await this.prisma.image.create({
+      data: {
+        filename: file.originalname,
+        path: file.path,
+        Topic: { connect: { id: createTopicDto.id } },
+      },
+      include: {
+        Topic: true,
+      },
+    });
     return this.prisma.topic.create({ data: createTopicDto });
   }
 
@@ -21,6 +31,25 @@ export class TopicsService {
     return this.prisma.topic.findUnique({ where: { id: id } });
   }
 
+  async updateImage(id: string, file: Express.Multer.File) {
+    const image = await this.prisma.image.create({
+      data: {
+        filename: file.originalname,
+        path: file.path,
+        Topic: { connect: { id: id } },
+      },
+      include: {
+        Topic: true,
+      },
+    });
+
+    return this.prisma.topic.update({
+      where: { id },
+      data: {
+        imageId: image.id,
+      },
+    });
+  }
   update(id: string, updateTopicDto: UpdateTopicDto) {
     return this.prisma.topic.update({
       where: { id },

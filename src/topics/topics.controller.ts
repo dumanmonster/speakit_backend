@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TopicsService } from './topics.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TopicEntity } from './entities/topic.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('topics')
 @ApiTags('topics')
 export class TopicsController {
@@ -19,8 +22,9 @@ export class TopicsController {
 
   @Post()
   @ApiCreatedResponse({ type: TopicEntity })
-  create(@Body() createTopicDto: CreateTopicDto) {
-    return this.topicsService.create(createTopicDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@Body() createTopicDto: CreateTopicDto, @UploadedFile() file) {
+    return this.topicsService.create(createTopicDto, file);
   }
 
   @Get()
@@ -43,6 +47,13 @@ export class TopicsController {
   @ApiOkResponse({ type: TopicEntity })
   update(@Param('id') id: string, @Body() updateTopicDto: UpdateTopicDto) {
     return this.topicsService.update(id, updateTopicDto);
+  }
+
+  @Patch(':id/image')
+  @ApiOkResponse({ type: TopicEntity })
+  @UseInterceptors(FileInterceptor('file'))
+  updateImage(@Param('id') id: string, @UploadedFile() file) {
+    return this.topicsService.updateImage(id, file);
   }
 
   @Delete(':id')
