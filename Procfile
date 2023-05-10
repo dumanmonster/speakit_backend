@@ -1,1 +1,1 @@
-web: docker run --rm -it -p $PORT:3000 speakit-api
+web: docker run --rm -it -p $PORT:3000 speakit_backend
