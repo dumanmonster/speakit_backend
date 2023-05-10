@@ -7,11 +7,11 @@ WORKDIR /app
 # Install app dependencies
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
 # Copy app source code
 COPY . .
 
 # Expose port and start the app
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "run", "start:prod"]
