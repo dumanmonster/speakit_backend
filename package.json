@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start:prod": "nest start --port $PORT",
+    "start:prod": "nest start",
     "build": "nest build",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate"
