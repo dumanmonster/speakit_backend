@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider      = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -15,8 +12,8 @@ model Definition {
   word        String  @unique
   description String
   level       String  @default("A1")
-  Topic       Topic?  @relation(fields: [topicId], references: [id])
   topicId     String?
+  Topic       Topic?  @relation(fields: [topicId], references: [id])
 }
 
 model Topic {
@@ -24,9 +21,9 @@ model Topic {
   name        String       @unique
   level       String       @default("A1")
   language    String       @default("EN")
+  imageId     String?
   definitions Definition[]
   image       Image?       @relation(fields: [imageId], references: [id])
-  imageId     String?
 }
 
 model User {
@@ -36,19 +33,19 @@ model User {
   password      String
   createdAt     DateTime @default(now())
   role          Role?    @default(USER)
-  language      String?  @default("EN")
   currentLevel  String?  @default("A1")
   learnedTopics String[] @default([])
-  image         Image?   @relation(fields: [imageId], references: [id])
+  language      String?  @default("EN")
   imageId       String?
+  image         Image?   @relation(fields: [imageId], references: [id])
 }
 
 model Image {
   id       String  @id @default(uuid())
   filename String
   path     String
-  User     User[]
   Topic    Topic[]
+  User     User[]
 }
 
 enum Role {

@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
-
+import { Request } from 'express';
 @Injectable()
 export class TopicsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTopicDto: CreateTopicDto, file: Express.Multer.File) {
+  async create(createTopicDto: CreateTopicDto, file: Request['file']) {
     const image = await this.prisma.image.create({
       data: {
         filename: file.originalname,
@@ -31,7 +31,7 @@ export class TopicsService {
     return this.prisma.topic.findUnique({ where: { id: id } });
   }
 
-  async updateImage(id: string, file: Express.Multer.File) {
+  async updateImage(id: string, file: Request['file']) {
     const image = await this.prisma.image.create({
       data: {
         filename: file.originalname,
