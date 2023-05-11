@@ -6,6 +6,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class TopicEntity implements Topic {
   @ApiProperty()
   id: string;
+
   @ApiProperty()
   name: string;
 
