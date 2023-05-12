@@ -1,5 +1,5 @@
 // src/users/users.service.ts
-
+import { Request } from 'express';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -33,7 +33,7 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  async updateImage(id: string, file: Express.Multer.File) {
+  async updateImage(id: string, file: Request['file']) {
     const image = await this.prisma.image.create({
       data: {
         filename: file.originalname,

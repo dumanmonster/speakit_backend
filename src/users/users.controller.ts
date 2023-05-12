@@ -1,29 +1,22 @@
 // src/users/users.controller.ts
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
- 
-
+  Get,
+  Param,
   ParseUUIDPipe,
+  Patch,
+  Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {
-
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { UsersService } from './users.service';
 @Controller('users')
 @ApiTags('users')
 export class UsersController {

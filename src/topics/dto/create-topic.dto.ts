@@ -2,9 +2,6 @@ import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTopicDto {
-  @IsString()
-  id: string;
-
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
