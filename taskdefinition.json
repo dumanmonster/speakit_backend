@@ -1,0 +1,79 @@
+{
+  "family": "speakitapi",
+  "containerDefinitions": [
+    {
+      "name": "speakit",
+      "image": "637119473856.dkr.ecr.us-east-1.amazonaws.com/speakit:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 0
+        }
+      ],
+      "environment": [
+        {
+          "name": "DATABASE_HOST",
+          "value": "database-1.cg1y4klyuedu.us-east-1.rds.amazonaws.com"
+        },
+        {
+          "name": "DATABASE_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "DATABASE_USERNAME",
+          "value": "postgres"
+        },
+        {
+          "name": "DATABASE_PASSWORD",
+          "value": "dukanuka2003"
+        },
+        {
+          "name": "DATABASE_NAME",
+          "value": "speakit_backend"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "us-east-1",
+          "awslogs-group": "/ecs/speakitapi",
+          "awslogs-stream-prefix": "speakit"
+        }
+      }
+    },
+    {
+      "name": "postgres",
+      "image": "637119473856.dkr.ecr.us-east-1.amazonaws.com/postgres:latest",
+      "portMappings": [
+        {
+          "containerPort": 5432,
+          "hostPort": 0
+        }
+      ],
+      "environment": [
+        {
+          "name": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "value": "root"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "value": "speakit_backend"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "us-east-1",
+          "awslogs-group": "/ecs/speakitapi",
+          "awslogs-stream-prefix": "postgres"
+        }
+      }
+    }
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

@@ -9,7 +9,7 @@ services:
     environment: 
         NODE_ENV: ${NODE_ENV}
         DATABASE_URL: ${DATABASE_URL}
-        PORT: 3000
+        PORT: ${PORT}
     ports: 
       - 8080:3000
     depends_on: 
