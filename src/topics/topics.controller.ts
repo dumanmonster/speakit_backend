@@ -23,8 +23,8 @@ export class TopicsController {
   @Post()
   @ApiCreatedResponse({ type: TopicEntity })
   @UseInterceptors(FileInterceptor('file'))
-  create(@Body() createTopicDto: CreateTopicDto, @UploadedFile() file) {
-    return this.topicsService.create(createTopicDto, file);
+  create(@Body() createTopicDto: CreateTopicDto) {
+    return this.topicsService.create(createTopicDto);
   }
 
   @Get()
