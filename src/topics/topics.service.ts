@@ -7,17 +7,17 @@ import { Request } from 'express';
 export class TopicsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTopicDto: CreateTopicDto, file: Request['file']) {
-    const image = await this.prisma.image.create({
-      data: {
-        filename: file.originalname,
-        path: file.path,
-        Topic: { connect: { name: createTopicDto.name } },
-      },
-      include: {
-        Topic: true,
-      },
-    });
+  async create(createTopicDto: CreateTopicDto) {
+    // const image = await this.prisma.image.create({
+    //   data: {
+    //     filename: file.originalname,
+    //     path: file.path,
+    //     Topic: { connect: { name: createTopicDto.name } },
+    //   },
+    //   include: {
+    //     Topic: true,
+    //   },
+    // });
     return this.prisma.topic.create({ data: createTopicDto });
   }
 
