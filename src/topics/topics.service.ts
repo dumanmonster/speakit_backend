@@ -12,7 +12,7 @@ export class TopicsService {
       data: {
         filename: file.originalname,
         path: file.path,
-        Topic: { connect: { id: createTopicDto.id } },
+        Topic: { connect: { name: createTopicDto.name } },
       },
       include: {
         Topic: true,
