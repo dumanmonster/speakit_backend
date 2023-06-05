@@ -1,12 +1,21 @@
 //src/auth/auth.controller.ts
 
-import { Body, Controller, Header, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Header,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AuthEntity } from './entities/auth.entity';
 import { LoginDto } from './dto/login.dto';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -24,5 +33,15 @@ export class AuthController {
   @ApiCreatedResponse({ type: UserEntity })
   async create(@Body() createUserDto: RegisterDto) {
     return new UserEntity(await this.authService.register(createUserDto));
+  }
+
+  @Get()
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req) {}
+
+  @Get('redirect')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@Req() req) {
+    return this.authService.googleLogin(req);
   }
 }

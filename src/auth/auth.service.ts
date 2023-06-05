@@ -14,6 +14,16 @@ import { AuthEntity } from './entities/auth.entity';
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
+  googleLogin(req) {
+    if (!req.user) {
+      return 'No user from google';
+    }
+
+    return {
+      message: 'User information from google',
+      user: req.user,
+    };
+  }
   async login(email: string, password: string): Promise<AuthEntity> {
     // Step 1: Fetch a user with the given email
     const user = await this.prisma.user.findUnique({ where: { email: email } });

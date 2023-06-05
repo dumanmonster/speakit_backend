@@ -33,25 +33,6 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  async updateImage(id: string, file: Request['file']) {
-    const image = await this.prisma.image.create({
-      data: {
-        filename: file.originalname,
-        path: file.path,
-        User: { connect: { id: id } },
-      },
-      include: {
-        User: true,
-      },
-    });
-
-    return this.prisma.user.update({
-      where: { id },
-      data: {
-        imageId: image.id,
-      },
-    });
-  }
   async update(id: string, updateUserDto: UpdateUserDto) {
     if (updateUserDto.password) {
       updateUserDto.password = await bcrypt.hash(

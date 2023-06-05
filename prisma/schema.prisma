@@ -9,8 +9,8 @@ datasource db {
 
 model Definition {
   id          String  @id @default(uuid())
-  word        String  @unique
-  description String
+  word        String
+  description String  @unique
   level       String  @default("A1")
   topicId     String?
   Topic       Topic?  @relation(fields: [topicId], references: [id])
@@ -21,34 +21,53 @@ model Topic {
   name        String       @unique
   level       String       @default("A1")
   language    String       @default("EN")
-  imageId     String?
   definitions Definition[]
-  image       Image?       @relation(fields: [imageId], references: [id])
 }
 
 model User {
-  id            String   @id @default(uuid())
-  name          String
-  email         String   @unique
-  password      String
-  createdAt     DateTime @default(now())
-  role          Role?    @default(USER)
-  currentLevel  String?  @default("A1")
-  learnedTopics String[] @default([])
-  language      String?  @default("EN")
-  imageId       String?
-  image         Image?   @relation(fields: [imageId], references: [id])
+  id                  String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  password            String
+  createdAt           DateTime @default(now())
+  verificationToken   String   @default("")
+  role                Role?    @default(USER)
+  currentLevel        String?  @default("A1")
+  learnedTopics       String[] @default([])
+  favoriteDefinitions String[] @default([])
+  language            String?  @default("EN")
 }
 
-model Image {
-  id       String  @id @default(uuid())
-  filename String
-  path     String
-  Topic    Topic[]
-  User     User[]
+
+
+model Organization {
+  id String @id @default(uuid())
+  name String @unique()
+  email String
+  phone String
+  city String
+  address String
+  rating Float @default(5)
+  industry String
+  announcments Announcment[]
+}
+
+model Announcment {
+  id String @id @default(uuid())
+  title String
+  description String
+  date DateTime
+  format Format
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id])
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum Format {
+  ONLINE
+  OFFLINE
 }

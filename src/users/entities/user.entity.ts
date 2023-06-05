@@ -28,10 +28,16 @@ export class UserEntity implements User {
   currentLevel: string;
 
   @ApiProperty()
+  verificationToken: string;
+
+  @ApiProperty()
   language: string;
 
   @ApiProperty()
   learnedTopics: Array<string>;
+
+  @ApiProperty()
+  favoriteDefinitions: Array<string>;
 
   @Exclude()
   password: string;

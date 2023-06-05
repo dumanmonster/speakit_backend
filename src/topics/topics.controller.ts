@@ -49,13 +49,6 @@ export class TopicsController {
     return this.topicsService.update(id, updateTopicDto);
   }
 
-  @Patch(':id/image')
-  @ApiOkResponse({ type: TopicEntity })
-  @UseInterceptors(FileInterceptor('file'))
-  updateImage(@Param('id') id: string, @UploadedFile() file) {
-    return this.topicsService.updateImage(id, file);
-  }
-
   @Delete(':id')
   @ApiOkResponse({ type: TopicEntity })
   remove(@Param('id') id: string) {

@@ -50,16 +50,6 @@ export class UsersController {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
-  @Patch(':id/image')
-  @ApiOkResponse({ type: UserEntity })
-  @UseInterceptors(FileInterceptor('file'))
-  async updateImage(
-    @Param('id', ParseUUIDPipe) id: string,
-    @UploadedFile() file,
-  ) {
-    return new UserEntity(await this.usersService.updateImage(id, file));
-  }
-
   @Delete(':id')
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param('id', ParseUUIDPipe) id: string) {
