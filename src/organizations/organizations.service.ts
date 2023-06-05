@@ -7,23 +7,26 @@ import { UpdateOrganizationDto } from './dto/update-organization.dto';
 export class OrganizationsService {
   constructor(private prisma: PrismaService) {}
 
+  // organization actions
   create(createOrganizationDto: CreateOrganizationDto) {
     return this.prisma.organization.create({ data: createOrganizationDto });
   }
 
   findAll() {
-    return `This action returns all organizations`;
+    return this.prisma.organization.findMany();
+  }
+  findOne(id: string) {
+    return this.prisma.organization.findUnique({ where: { id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} organization`;
+  update(id: string, updateOrganizationDto: UpdateOrganizationDto) {
+    return this.prisma.organization.update({
+      where: { id },
+      data: updateOrganizationDto,
+    });
   }
 
-  update(id: number, updateOrganizationDto: UpdateOrganizationDto) {
-    return `This action updates a #${id} organization`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} organization`;
+  remove(id: string) {
+    return this.prisma.organization.delete({ where: { id } });
   }
 }

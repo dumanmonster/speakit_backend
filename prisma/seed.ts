@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const roundsOfHashing = 10;
 async function main() {
-  prisma.user.delete({ where: { id: '2' } });
+  console.log('fsdfsd');
 }
 
 // execute the main function

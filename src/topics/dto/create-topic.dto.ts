@@ -16,7 +16,4 @@ export class CreateTopicDto {
   @MaxLength(2)
   @ApiProperty()
   language: string;
-
-  @ApiProperty()
-  imageId: string;
 }

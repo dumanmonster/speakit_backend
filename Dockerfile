@@ -21,8 +21,7 @@ COPY tsconfig.json ./
 # Copy app source code
 COPY . .
 
-RUN npm install --production
-RUN npm install -g @nestjs/cli
+RUN npm install 
 RUN npx prisma generate
 
 

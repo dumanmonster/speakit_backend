@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { TopicsModule } from './topics/topics.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { OrganizationsModule } from './organizations/organizations.module';
     TopicsModule,
     PrismaModule,
     OrganizationsModule,
+    AnnouncementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
