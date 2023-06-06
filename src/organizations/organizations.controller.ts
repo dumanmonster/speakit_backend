@@ -30,6 +30,12 @@ export class OrganizationsController {
     return this.organizationsService.findAll();
   }
 
+  @Get(':id/announcements')
+  @ApiOkResponse({ type: OrganizationEntity, isArray: true })
+  findAllAnnouncements(@Param('id') id: string) {
+    return this.organizationsService.findAllAnnouncements(id);
+  }
+
   @Get(':id')
   @ApiOkResponse({ type: OrganizationEntity })
   findOne(@Param('id') id: string) {

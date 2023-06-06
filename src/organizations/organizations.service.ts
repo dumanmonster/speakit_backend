@@ -11,6 +11,12 @@ export class OrganizationsService {
   create(createOrganizationDto: CreateOrganizationDto) {
     return this.prisma.organization.create({ data: createOrganizationDto });
   }
+  findAllAnnouncements(id: string) {
+    return this.prisma.organization.findUnique({
+      where: { id },
+      include: { announcements: true },
+    }).announcements;
+  }
 
   findAll() {
     return this.prisma.organization.findMany();

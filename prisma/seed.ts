@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const roundsOfHashing = 10;
 async function main() {
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Useful IT verbs',
       level: 'B2',
@@ -46,7 +46,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Software',
       level: 'B2',
@@ -87,7 +87,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Internet',
       level: 'B2',
@@ -128,7 +128,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Hardware',
       level: 'B2',
@@ -144,13 +144,13 @@ async function main() {
           {
             word: 'a network card',
             description:
-              'To use a compiler to process source code and produce executable code',
+              'a piece of computer hardware designed to allow computers to communicate over a computer network',
             level: 'B2',
           },
           {
             word: 'air cooling',
             description:
-              'a piece of computer hardware designed to allow computers to communicate over a computer network',
+              'a process of lowering air temperature by dissipating heat',
             level: 'B2',
           },
           {
@@ -169,7 +169,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'IT slang',
       level: 'B2',
@@ -210,7 +210,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Basic IT',
       level: 'B2',
@@ -250,7 +250,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Business English',
       level: 'B2',
@@ -290,7 +290,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Freelance',
       level: 'B2',
@@ -329,7 +329,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Database',
       level: 'B2',
@@ -368,7 +368,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Blockchain',
       level: 'B2',
@@ -402,7 +402,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'Hackathon terms',
       level: 'B2',
@@ -442,7 +442,7 @@ async function main() {
       },
     },
   });
-  prisma.topic.create({
+  await prisma.topic.create({
     data: {
       name: 'UI/UX design',
       level: 'B2',
@@ -480,24 +480,25 @@ async function main() {
       },
     },
   });
-
-  prisma.user.create({
+  const password = await bcrypt.hash('12345678admin', roundsOfHashing);
+  const admin = await prisma.user.create({
     data: {
       name: 'Main Admin',
       email: 'superadmin@gmail.com',
       role: 'ADMIN',
-      password: '12345678admin',
+      password: password,
     },
   });
+  console.log(admin);
 }
 
 // execute the main function
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    // close Prisma Client at the end
+  .then(async () => {
     await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });
