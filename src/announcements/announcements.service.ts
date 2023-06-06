@@ -7,9 +7,11 @@ import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 export class AnnouncementsService {
   constructor(private prisma: PrismaService) {}
 
-  // create(createAnnouncementDto: CreateAnnouncementDto) {
-  //   return this.prisma.announcement.create({ data: createAnnouncementDto });
-  // }
+  create(createAnnouncementDto: CreateAnnouncementDto) {
+    return this.prisma.announcement.create({
+      data: createAnnouncementDto,
+    });
+  }
 
   findAll() {
     return this.prisma.announcement.findMany();
@@ -25,12 +27,12 @@ export class AnnouncementsService {
     return this.prisma.announcement.findUnique({ where: { id } });
   }
 
-  // update(id: string, updateAnnouncementDto: UpdateAnnouncementDto) {
-  //   return this.prisma.announcement.update({
-  //     where: { id },
-  //     data: updateAnnouncementDto,
-  //   });
-  // }
+  update(id: string, updateAnnouncementDto: UpdateAnnouncementDto) {
+    return this.prisma.announcement.update({
+      where: { id },
+      data: updateAnnouncementDto,
+    });
+  }
 
   remove(id: string) {
     return `This action removes a #${id} announcement`;

@@ -42,10 +42,10 @@ model User {
 model VerificationCode {
   id        String   @id @default(uuid())
   code      String
-  userId    String?   @unique
+  userId    String   @unique
   expiresAt DateTime
   isUsed    Boolean  @default(false)
-  user      User?     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Organization {
@@ -61,13 +61,13 @@ model Organization {
 }
 
 model Announcement {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String
-  date           DateTime      @default(now())
-  format         Format        @default(ONLINE)
-  organizationId String?
-  organization   Organization? @relation(fields: [organizationId], references: [id])
+  date           DateTime     @default(now())
+  format         Format       @default(ONLINE)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
   entryFee       String
 }
 

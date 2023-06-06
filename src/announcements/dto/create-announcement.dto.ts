@@ -20,5 +20,10 @@ export class CreateAnnouncementDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
+  entryFee: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
   organizationId: string;
 }

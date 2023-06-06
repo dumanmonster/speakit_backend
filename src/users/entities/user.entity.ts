@@ -39,6 +39,9 @@ export class UserEntity implements User {
   @ApiProperty()
   favoriteDefinitions: Array<string>;
 
+  @ApiProperty()
+  isVerified: boolean;
+
   @Exclude()
   password: string;
 }

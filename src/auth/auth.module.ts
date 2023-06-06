@@ -7,6 +7,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { UsersModule } from 'src/users/users.module';
 import { JwtStrategy } from './jwt.strategy';
 import { GoogleStrategy } from './google.strategy';
+import { MailService } from './mail.service';
 export const jwtSecret = 'zjP9h6ZI5LoSKCRj';
 @Module({
   imports: [
@@ -19,6 +20,6 @@ export const jwtSecret = 'zjP9h6ZI5LoSKCRj';
     UsersModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, GoogleStrategy],
+  providers: [AuthService, JwtStrategy, GoogleStrategy, MailService],
 })
 export class AuthModule {}
