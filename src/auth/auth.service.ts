@@ -9,10 +9,15 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from './../prisma/prisma.service';
 import { RegisterDto } from './dto/register.dto';
 import { AuthEntity } from './entities/auth.entity';
+import { MailService } from './mail.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+    private mailService: MailService,
+  ) {}
 
   googleLogin(req) {
     if (!req.user) {
@@ -65,5 +70,32 @@ export class AuthService {
     return this.prisma.user.create({
       data: createUserDto,
     });
+  }
+  async sendVerification(email: string, userId: string) {
+    const verificationCode = this.generateVerificationCode();
+    // await this.prisma.verificationCode.create({
+    //   data: {
+    //     code: verificationCode,
+    //     userId: userId,
+    //   },
+    // });
+
+    return await this.mailService.sendVerificationEmail(
+      email,
+      verificationCode,
+    );
+  }
+  private generateVerificationCode() {
+    const length = 6; // Define the length of the verification code as desired
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let verificationCode = '';
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      verificationCode += characters.charAt(randomIndex);
+    }
+
+    return verificationCode;
   }
 }

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Format } from '@prisma/client';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateAnnouncementDto {
@@ -13,12 +14,11 @@ export class CreateAnnouncementDto {
   description: string;
 
   @IsNotEmpty()
-  @IsString()
   @ApiProperty()
-  format: string;
+  format: Format;
 
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
-  organizationId?: string | null;
+  organizationId: string;
 }

@@ -16,6 +16,7 @@ import { LoginDto } from './dto/login.dto';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { VerifyDto } from './dto/verify.dto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -35,9 +36,11 @@ export class AuthController {
     return new UserEntity(await this.authService.register(createUserDto));
   }
 
-  @Get()
-  @UseGuards(AuthGuard('google'))
-  async googleAuth(@Req() req) {}
+  @Post('verify')
+  @ApiCreatedResponse()
+  async verifyAccount(@Body() verifyDto: VerifyDto) {
+    return this.authService.sendVerification(verifyDto.email, verifyDto.userId);
+  }
 
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
