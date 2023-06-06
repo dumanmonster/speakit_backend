@@ -490,6 +490,73 @@ async function main() {
     },
   });
   console.log(admin);
+
+  await prisma.organization.create({
+    data: {
+      name: 'Speak Better English',
+      email: 'speakbetter@gmail.com',
+      phone: '+77777777777',
+      city: 'Astana',
+      address: 'Petrov St.16',
+      industry: 'Education',
+      announcements: {
+        create: [
+          {
+            title: 'Speaking Club Weekend',
+            description:
+              'The Speaking Club is the best way to Practice Speaking in English and other languages Online in a real-life setting. Structured conversation groups with incredible hosts.',
+            format: 'OFFLINE',
+            entryFee: 'free',
+            date: '2023-06-10T10:30:24.398Z',
+          },
+        ],
+      },
+    },
+  });
+  await prisma.organization.create({
+    data: {
+      name: 'Eagilik Books & Coffee',
+      email: 'eagilik@gmail.com',
+      phone: '+77777777777',
+      city: 'Astana',
+      address: 'Kenesary St.61/1',
+      industry: 'Education',
+      announcements: {
+        create: [
+          {
+            title: 'BSC Speaking Club',
+            description:
+              'Business Speaking Club (BSC) is a group of people engaged in a legal environment professionally and academically. The aim of conversations within the Club is to enhance the English skills of the participants and share and gain knowledge on the agenda topic.',
+            format: 'OFFLINE',
+            entryFee: 'free',
+            date: '2023-06-10T10:30:24.398Z',
+          },
+        ],
+      },
+    },
+  });
+  await prisma.organization.create({
+    data: {
+      name: 'XPLORE',
+      email: 'xplorebusiness@gmail.com',
+      phone: '+77777777777',
+      city: 'Astana',
+      address: 'Saryarqa Avenue 28',
+      industry: 'Training Center',
+      announcements: {
+        create: [
+          {
+            title: 'Speakful Club',
+            description:
+              'Speakful Club is structured in a cohort-based way, meaning you’ll be interacting with a cohort (i.e. group) of other students in real life. Cohort-based courses have been proven to facilitate learning and make it easier for students to comprehend what they’re being taught.',
+            format: 'OFFLINE',
+            entryFee: 'free',
+            date: '2023-06-10T10:30:24.398Z',
+          },
+        ],
+      },
+    },
+  });
 }
 
 // execute the main function

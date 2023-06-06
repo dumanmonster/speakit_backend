@@ -57,6 +57,7 @@ model Organization {
   address       String
   rating        Float          @default(5)
   industry      String
+  description   String
   announcements Announcement[]
 }
 
