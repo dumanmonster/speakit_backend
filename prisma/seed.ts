@@ -156,7 +156,7 @@ async function main() {
           {
             word: 'removable media',
             description:
-              'a process of lowering air temperature by dissipating heat',
+              'any type of storage device that can be removed from a computer while the system is running',
             level: 'B2',
           },
           {
