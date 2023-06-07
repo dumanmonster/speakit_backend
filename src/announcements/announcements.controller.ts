@@ -18,11 +18,11 @@ import { AnnouncementEntity } from './entities/announcement.entity';
 export class AnnouncementsController {
   constructor(private readonly announcementsService: AnnouncementsService) {}
 
-  // @Post()
-  // @ApiCreatedResponse({ type: AnnouncementEntity })
-  // create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
-  //   return this.announcementsService.create(createAnnouncementDto);
-  // }
+  @Post()
+  @ApiCreatedResponse({ type: AnnouncementEntity })
+  create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
+    return this.announcementsService.create(createAnnouncementDto);
+  }
 
   @Get()
   @ApiOkResponse({ type: AnnouncementEntity, isArray: true })
@@ -42,14 +42,14 @@ export class AnnouncementsController {
     return this.announcementsService.findOne(id);
   }
 
-  // @Patch(':id')
-  // @ApiOkResponse({ type: AnnouncementEntity })
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateAnnouncementDto: UpdateAnnouncementDto,
-  // ) {
-  //   return this.announcementsService.update(id, updateAnnouncementDto);
-  // }
+  @Patch(':id')
+  @ApiOkResponse({ type: AnnouncementEntity })
+  update(
+    @Param('id') id: string,
+    @Body() updateAnnouncementDto: UpdateAnnouncementDto,
+  ) {
+    return this.announcementsService.update(id, updateAnnouncementDto);
+  }
 
   @Delete(':id')
   @ApiOkResponse({ type: AnnouncementEntity })
