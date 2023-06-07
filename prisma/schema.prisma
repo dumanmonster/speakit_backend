@@ -25,19 +25,18 @@ model Topic {
 }
 
 model User {
-  id                    String            @id @default(uuid())
-  name                  String
-  email                 String            @unique
-  password              String
-  createdAt             DateTime          @default(now())
-  isVerified            Boolean?          @default(false)
-  verificationCode      VerificationCode?
-  role                  Role?             @default(USER)
-  currentLevel          String?           @default("A1")
-  learnedTopics         String[]          @default([])
-  favoriteDefinitions   String[]          @default([])
-  language              String?           @default("EN")
-  enrolledAnnouncements Announcement[]
+  id                  String            @id @default(uuid())
+  name                String
+  email               String            @unique
+  password            String
+  createdAt           DateTime          @default(now())
+  isVerified          Boolean?          @default(false)
+  verificationCode    VerificationCode?
+  role                Role?             @default(USER)
+  currentLevel        String?           @default("A1")
+  learnedTopics       String[]          @default([])
+  favoriteDefinitions String[]          @default([])
+  language            String?           @default("EN")
 }
 
 model VerificationCode {
@@ -70,9 +69,6 @@ model Announcement {
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
   entryFee       String
-  User           User?        @relation(fields: [userId], references: [id])
-  userId         String?
-  link           String?
 }
 
 enum Role {

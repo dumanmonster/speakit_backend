@@ -8,6 +8,7 @@ import { TopicsModule } from './topics/topics.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AnnouncementsModule } from './announcements/announcements.module';
     PrismaModule,
     OrganizationsModule,
     AnnouncementsModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
