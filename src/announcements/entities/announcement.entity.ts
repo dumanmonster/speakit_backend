@@ -23,4 +23,7 @@ export class AnnouncementEntity implements Announcement {
 
   @ApiProperty()
   entryFee: string;
+
+  @ApiProperty()
+  link?: string;
 }
